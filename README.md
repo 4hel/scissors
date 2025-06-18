@@ -1,17 +1,32 @@
 # scissors
 Rock Paper Scissors Game
 
-## Game State Machine
+## Game State Machines
+
+### Client State Machine
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Lobby
-    Lobby --> WaitingForPartner : find_partner
-    WaitingForPartner --> GameReady : partner_found
-    GameReady --> PlayerTurn : start_game
-    PlayerTurn --> WaitingForOpponent : move_submitted
-    WaitingForOpponent --> ShowResults : both_moves_received
-    ShowResults --> GameReady : play_again
-    ShowResults --> Lobby : leave_game
-    GameReady --> Lobby : leave_game
+    [*] --> Idle
+    Idle --> FindingPartner : FindPartnerEvent
+    FindingPartner --> InGame : PartnerFoundEvent
+    InGame --> MakingMove : StartGameEvent
+    MakingMove --> WaitingForResult : MoveSubmittedEvent
+    WaitingForResult --> ViewingResults : GameResultsEvent
+    ViewingResults --> InGame : PlayAgainEvent
+    ViewingResults --> Idle : LeaveGameEvent
+    InGame --> Idle : LeaveGameEvent
+```
+
+### Server State Machine
+
+```mermaid
+stateDiagram-v2
+    [*] --> MatchmakingPool
+    MatchmakingPool --> GameSession : PartnerFoundEvent
+    GameSession --> CollectingMoves : StartGameEvent
+    CollectingMoves --> EvaluatingRound : BothMovesReceivedEvent
+    EvaluatingRound --> CollectingMoves : PlayAgainEvent
+    EvaluatingRound --> MatchmakingPool : LeaveGameEvent
+    GameSession --> MatchmakingPool : LeaveGameEvent
 ```
