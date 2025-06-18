@@ -3,7 +3,7 @@ build:
 
 host_ip_prd = '178.156.172.188'
 
-deplay: build
+deploy: build
 	rsync -P ./bin/linux_amd64/ws dodo@${host_ip_prd}:~
 	rsync -P ./remote/production/ws.service dodo@${host_ip_prd}:~
 	ssh -t dodo@${host_ip_prd} '\
