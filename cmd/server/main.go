@@ -132,9 +132,10 @@ func (s *Server) handleFindPartner(player *Player) {
 		s.sendEvent(player, events.Event{Type: events.StartGameEvent})
 
 		game.State = events.ServerCollectingMoves
+		waitingPlayerID := s.waitingPlayer.ID
 		s.waitingPlayer = nil
 
-		log.Printf("Game %s started between %s and %s", gameID, s.waitingPlayer.ID, player.ID)
+		log.Printf("Game %s started between %s and %s", gameID, waitingPlayerID, player.ID)
 	}
 }
 
