@@ -184,7 +184,7 @@ func main() {
 	client := NewClient()
 
 	// Connect to server
-	serverURL := "ws://localhost:8080/ws"
+	serverURL := "wss://ws.dingodream.com/ws"
 	if err := client.connect(serverURL); err != nil {
 		log.Fatal(err)
 	}
