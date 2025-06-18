@@ -6,12 +6,12 @@ Rock Paper Scissors Game
 ```mermaid
 stateDiagram-v2
     [*] --> Lobby
-    Lobby --> WaitingForPartner : Find Partner
-    WaitingForPartner --> GameReady : Partner Found
-    GameReady --> PlayerTurn : Start Game
-    PlayerTurn --> WaitingForOpponent : Move Submitted
-    WaitingForOpponent --> ShowResults : Both Moves Received
-    ShowResults --> GameReady : Play Again
-    ShowResults --> Lobby : Leave Game
-    GameReady --> Lobby : Leave Game
+    Lobby --> WaitingForPartner : find_partner
+    WaitingForPartner --> GameReady : partner_found
+    GameReady --> PlayerTurn : start_game
+    PlayerTurn --> WaitingForOpponent : move_submitted
+    WaitingForOpponent --> ShowResults : both_moves_received
+    ShowResults --> GameReady : play_again
+    ShowResults --> Lobby : leave_game
+    GameReady --> Lobby : leave_game
 ```
