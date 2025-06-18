@@ -115,7 +115,7 @@ func (s *Server) handleFindPartner(player *Player) {
 		}
 
 		s.gameSessions[gameID] = game
-		
+
 		// Notify both players
 		partnerData := events.PartnerFoundData{GameID: gameID}
 		s.sendEvent(s.waitingPlayer, events.Event{
@@ -146,8 +146,8 @@ func (s *Server) handleMoveSubmitted(player *Player, event events.Event) {
 	// Find the game this player is in
 	var game *GameSession
 	for _, g := range s.gameSessions {
-		if (g.Player1 != nil && g.Player1.ID == player.ID) || 
-		   (g.Player2 != nil && g.Player2.ID == player.ID) {
+		if (g.Player1 != nil && g.Player1.ID == player.ID) ||
+			(g.Player2 != nil && g.Player2.ID == player.ID) {
 			game = g
 			break
 		}
@@ -234,8 +234,8 @@ func (s *Server) handlePlayAgain(player *Player) {
 
 	// Find the game and reset it for another round
 	for _, game := range s.gameSessions {
-		if (game.Player1 != nil && game.Player1.ID == player.ID) || 
-		   (game.Player2 != nil && game.Player2.ID == player.ID) {
+		if (game.Player1 != nil && game.Player1.ID == player.ID) ||
+			(game.Player2 != nil && game.Player2.ID == player.ID) {
 			game.State = events.ServerCollectingMoves
 			s.sendEvent(game.Player1, events.Event{Type: events.StartGameEvent})
 			s.sendEvent(game.Player2, events.Event{Type: events.StartGameEvent})
@@ -250,8 +250,8 @@ func (s *Server) handleLeaveGame(player *Player) {
 
 	// Find and remove the game
 	for gameID, game := range s.gameSessions {
-		if (game.Player1 != nil && game.Player1.ID == player.ID) || 
-		   (game.Player2 != nil && game.Player2.ID == player.ID) {
+		if (game.Player1 != nil && game.Player1.ID == player.ID) ||
+			(game.Player2 != nil && game.Player2.ID == player.ID) {
 			delete(s.gameSessions, gameID)
 			break
 		}
@@ -271,9 +271,9 @@ func (s *Server) sendEvent(player *Player, event events.Event) {
 
 func main() {
 	server := NewServer()
-	
+
 	http.HandleFunc("/ws", server.handleConnection)
-	
-	log.Println("Rock Paper Scissors server starting on :8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+
+	log.Println("Rock Paper Scissors server starting on :3000")
+	log.Fatal(http.ListenAndServe(":3000", nil))
 }
