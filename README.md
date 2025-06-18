@@ -33,9 +33,6 @@ stateDiagram-v2
 
 ## WebSocket API Protocol
 
-### Connection
-Connect to: `ws://localhost:8080/ws`
-
 ### Message Format
 All messages are JSON objects with this structure:
 ```json
